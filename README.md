@@ -63,6 +63,8 @@ export default App;
 Source :
 - https://reactrouter.com/fr/main/start/tutorial#adding-a-router
 
+On wrap `App` dans `Router`.
+
 src\index.js
 ```js
 import React from 'react';
@@ -160,4 +162,24 @@ function App() {
 }
 
 export default App;
+```
+On crée : 
+
+- src\components\Wrapper\index.js
+- src\components\Wrapper\Header.js
+- src\components\Wrapper\Footer.js
+
+On supprime import react qui n'est plus nécessaire depuis la version 18 de React.
+
+src\components\Wrapper\Header.js
+```js
+const Header = () => {
+    return (
+        <div>
+            
+        </div>
+    );
+};
+
+export default Header;
 ```
