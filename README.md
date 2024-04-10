@@ -58,3 +58,106 @@ function App() {
 
 export default App;
 ```
+## Création d'un routeur
+
+Source :
+- https://reactrouter.com/fr/main/start/tutorial#adding-a-router
+
+src\index.js
+```js
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+	<React.StrictMode>
+		<Router>
+			<App />
+		</Router>
+	</React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+```
+
+src\App.js
+```js
+import { Routes, Route } from "react-router-dom";
+
+function App() {
+	return (
+		<div className="App">
+			
+		</div>
+	);
+}
+
+export default App;
+```
+
+On met le chemin et l'element
+```js
+import { Routes, Route } from "react-router-dom";
+
+function App() {
+	return (
+		<main className="App">
+			<Routes>
+				<Route path="/" element={<Home/>} />
+			</Routes>
+		</main>
+	);
+}
+
+export default App;
+```
+
+On créer : 
+- `src\components\Home\index.js`
+- `src\components\Contact\index.js`
+
+On tape `rsc` dans src\components\Home\index.js
+```js
+import React from 'react';
+
+const index = () => {
+    return (
+        <div>
+            
+        </div>
+    );
+};
+
+export default index;
+```
+
+Le répertoire doit avoir une lettre majuscule car il représente le composant.
+
+Puis on importe les répertoires.
+
+src\App.js
+```js
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Contact from "./components/Contact";
+
+function App() {
+	return (
+		<main className="App">
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/contact" element={<Contact />} />
+			</Routes>
+		</main>
+	);
+}
+
+export default App;
+```
