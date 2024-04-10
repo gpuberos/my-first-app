@@ -27,3 +27,18 @@ function App() {
 export default App;
 
 ```
+
+Pour ajouter une image :
+```js
+import bunny from "./assets/images/bunny.webp";
+
+function App() {
+	return (
+		<div className="App">
+			<img src={bunny}/>
+		</div>
+	);
+}
+
+export default App;
+```
