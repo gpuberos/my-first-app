@@ -1,10 +1,10 @@
-import React from 'react';
+import Wrapper from "../Wrapper";
 
 const index = () => {
     return (
-        <div>
-            <h1>Contact</h1>
-        </div>
+        <Wrapper>
+            <h1>Welcome to the contact page</h1>
+        </Wrapper>
     );
 };
 

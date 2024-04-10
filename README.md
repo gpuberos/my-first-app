@@ -183,3 +183,60 @@ const Header = () => {
 
 export default Header;
 ```
+En utilisant le destructing on va afficher `children`
+
+src\components\Wrapper\index.js
+```js
+import Header from "./Header";
+import Footer from "./Footer";
+
+const index = ({children}) => {
+    return (
+        <>
+            <Header/>            
+            {children}
+            <Footer/>
+        </>
+    );
+};
+
+export default index;
+```
+
+```js
+import Wrapper from "../Wrapper";
+
+const index = () => {
+    return (
+        <Wrapper>
+            <h1>Welcome to the homepage</h1>
+        </Wrapper>
+    );
+};
+
+export default index;
+```
+
+### Navigation
+
+Ajout de liens :
+
+Source :
+- https://reactrouter.com/en/main/components/link
+
+```js
+import { Link } from "react-router-dom";
+
+const Header = () => {
+    return (
+        <nav>
+            <ul>
+                <li><Link to={"/"}>Home</Link></li>
+                <li><Link to={"/contact"}>Contact</Link></li>
+            </ul>
+        </nav>
+    );
+};
+
+export default Header;
+```
