@@ -166,8 +166,8 @@ function App() {
 
 export default App;
 ```
-On crée : 
 
+On crée : 
 - src\components\Wrapper\index.js
 - src\components\Wrapper\Header.js
 - src\components\Wrapper\Footer.js
@@ -222,7 +222,7 @@ export default index;
 
 ### Navigation
 
-Ajout de liens :
+Ajout de liens
 
 Source :
 - https://reactrouter.com/en/main/components/link
@@ -369,7 +369,7 @@ export default Header;
 
 ```
 
-Source :
+Sources :
 - https://docs.fontawesome.com/web/use-with/react/
 - https://docs.fontawesome.com/web/use-with/react/add-icons
 
@@ -624,12 +624,12 @@ const Header = () => {
 export default Header;
 ```
 
-### Création d'un composant Equipes
+### Création d'un composant Equipe
 
 Dans le composant `Business`, on veut un composant `Equipe` et qu'on appelle autant de fois qu'il est nécessaire le composant `Personnage`.
 Le composant `Equipe` à un `State` qui prend en paramètre une liste de personnages et avec ça on va mapper pour appeler le composant `Personnage` autant de fois que nécessaire.
 
-Le composant Personnage contient :
+Le composant `Personnage` contient :
 - Image
 - Nom : Luffy
 - Equipage : Chapeau de Paille
