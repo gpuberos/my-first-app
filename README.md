@@ -533,14 +533,14 @@ export default Footer;
 
 ### Creation de nouvelles routes
 
-On crée de nouvelles routes pour Blog, Business et Service.
+On crée de nouvelles routes pour Blog, Business et Prestation.
 
 src\App.js
 ```js
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Business from "./components/Business";
-import Service from "./components/Service";
+import Prestation from "./components/Prestation";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
 
@@ -550,7 +550,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home/>} />
 				<Route path="/business" element={<Business/>} />
-				<Route path="/service" element={<Service/>} />
+				<Route path="/service" element={<Prestation/>} />
 				<Route path="/blog" element={<Blog />} />
 				<Route path="/contact" element={<Contact />} />
 			</Routes>
@@ -579,6 +579,8 @@ export default index;
 ```
 
 Puis on ajoute les liens dans la navbar du Header
+
+src\components\Wrapper\Header.js
 ```js
 import { Link } from "react-router-dom";
 import lapin from "../../assets/images/bunny.webp";
@@ -617,3 +619,109 @@ const Header = () => {
 export default Header;
 ```
 
+### Création d'un composant Equipes
+
+Dans le composant Business, on veut un composant Equipes et qu'on appelle autant de fois qu'il est nécessaire le composant Personnage.
+Le composant Equipes à un State qui prend en paramètre une liste de personnage et avec ça on va mapper pour appeler le composant Personnage autant que nécessaire.
+
+Le composant Personnage contient
+- Image
+- Nom : Luffy
+- Equipage : Chapeau de Paille
+
+```js
+const Personnage = ({nom, img, equipe}) => {
+    return (
+
+        <div className="card" style={{ width: "18rem"}}>
+            <img src={img} className="card-img-top" alt={"Avis de recherche de " + nom} />
+            <div className="card-body">
+                <p className="card-title">Nom : {nom}</p>
+                <p className="card-text">Equipage : {equipe}</p>
+            </div>
+        </div>
+
+    );
+};
+
+export default Personnage;
+```
+
+On teste mais l'image ne s'affiche pas, quand on fait un console log ça nous retourne un objet pour l'image
+
+src\components\Business\Equipe.js
+```js
+import { useState } from "react";
+import chopper from "../../assets/images/chopper.jpg";
+import Personnage from "./Personnage";
+
+const Equipe = () => {
+
+    const [perso, setPerso] = useState([
+        {nom: "Chopper", img: {chopper}, equipe: "Chapeau de paille"},
+        {nom: "Monkey D Luffy", img: "", equipe: "Chapeau de paille"},
+        {nom: "Nami", img: "", equipe: "Chapeau de paille"},
+        {nom: "Nico Robin", img: "", equipe: "Chapeau de paille"},
+        {nom: "Sanji", img: "", equipe: "Chapeau de paille"},
+        {nom: "God Usop", img: "", equipe: "Chapeau de paille"},
+        {nom: "Roronoa Zoro", img: "", equipe: "Chapeau de paille"}
+    ])
+
+    return (
+        <div>
+            <h2>Notre équipage :</h2>
+            {/* <Personnage perso={perso[0]} /> */}
+            <Personnage nom= {perso[0].nom} img={perso[0].img} equipe={perso[0].equipe} />
+
+            {/*<div className="card" style={{ width: "18rem" }}>
+                <img src={perso[0].img} className="card-img-top" alt={"Avis de recherche de " + perso[0].nom} />
+                <div className="card-body">
+                    <p className="card-title">Nom : {perso[0].nom}</p>
+                    <p className="card-text">Equipage : {perso[0].equipe}</p>
+                </div>
+            </div>*/}
+        </div>
+    );
+};
+
+export default Equipe;
+```
+
+Dans le premier exemple, on a écrit `img: {chopper}`. Cela crée un objet avec une propriété chopper qui contient l'image, au lieu d'assigner directement l'image à la propriété `img`.
+
+Donc on doit écrire `img: chopper` pour assigner directement l'image à la propriété `img`.
+
+src\components\Business\Equipe.js
+```js
+import { useState } from "react";
+import chopper from "../../assets/images/chopper.jpg";
+import luffy from "../../assets/images/luffy.jpg";
+import nami from "../../assets/images/nami.jpg";
+import nico from "../../assets/images/nico.jpg";
+import sanji from "../../assets/images/sanji.jpg";
+import usopp from "../../assets/images/usopp.jpg";
+import zoro from "../../assets/images/zoro.jpg";
+import Personnage from "./Personnage";
+
+const Equipe = () => {
+
+    const [perso, setPerso] = useState([
+        {nom: "Chopper", img: chopper, equipe: "Chapeau de paille"},
+        {nom: "Monkey D Luffy", img: luffy, equipe: "Chapeau de paille"},
+        {nom: "Nami", img: nami, equipe: "Chapeau de paille"},
+        {nom: "Nico Robin", img: nico, equipe: "Chapeau de paille"},
+        {nom: "Sanji", img: sanji, equipe: "Chapeau de paille"},
+        {nom: "God Usopp", img: usopp, equipe: "Chapeau de paille"},
+        {nom: "Roronoa Zoro", img: zoro, equipe: "Chapeau de paille"}
+    ])
+
+    return (
+        <div>
+            <h2>Notre équipage :</h2>
+            <Personnage nom= {perso[0].nom} img={perso[0].img} equipe={perso[0].equipe} />
+        </div>
+    );
+};
+
+export default Equipe;
+```

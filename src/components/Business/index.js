@@ -1,9 +1,10 @@
 import Wrapper from "../Wrapper";
+import Equipe from "./Equipe";
 
 const index = () => {
     return (
         <Wrapper>
-            <h1 className="h3 text-primary">Notre Entreprise</h1>
+            <Equipe />
         </Wrapper>
     );
 };
