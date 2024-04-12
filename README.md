@@ -762,3 +762,45 @@ const Equipe = () => {
 export default Equipe;
 ```
 
+On souhaite créer un composant `Personnage` pour chaque objet du tableau `perso`.
+
+- `perso.map((el, index) => ...)` : Pour chaque élément `el` (qui représente un objet dans le tableau `perso`) et son `index` (qui représente la position de l’élément dans le tableau), exécutez la fonction fléchée suivante.
+- `<Personnage key={index} nom={el.nom} img={el.img} equipe={el.equipe} />` : Pour chaque objet dans le tableau `perso`, créez un composant `Personnage`. Les props `nom`, `img`, et `equipe` sont définies par les propriétés correspondantes de l’objet `el`. La prop `key` est définie par l’`index` de l’objet dans le tableau.
+- `key={index}`: En React, chaque élément créé par une fonction `map()` doit avoir une prop `key` unique. C’est important pour que React puisse identifier correctement chaque élément lors de la mise à jour ou du rendu de la liste.
+
+```js
+import { useState } from "react";
+import chopper from "../../assets/images/chopper.jpg";
+import luffy from "../../assets/images/luffy.jpg";
+import nami from "../../assets/images/nami.jpg";
+import nico from "../../assets/images/nico.jpg";
+import sanji from "../../assets/images/sanji.jpg";
+import usopp from "../../assets/images/usopp.jpg";
+import zoro from "../../assets/images/zoro.jpg";
+import Personnage from "./Personnage";
+
+const Equipe = () => {
+
+    const [perso, setPerso] = useState([
+        {nom: "Chopper", img: chopper, equipe: "Chapeau de paille"},
+        {nom: "Monkey D Luffy", img: luffy, equipe: "Chapeau de paille"},
+        {nom: "Nami", img: nami, equipe: "Chapeau de paille"},
+        {nom: "Nico Robin", img: nico, equipe: "Chapeau de paille"},
+        {nom: "Sanji", img: sanji, equipe: "Chapeau de paille"},
+        {nom: "God Usopp", img: usopp, equipe: "Chapeau de paille"},
+        {nom: "Roronoa Zoro", img: zoro, equipe: "Chapeau de paille"}
+    ])
+
+    return (
+        <section className="container">
+            <h2>Notre équipage :</h2>
+            <div className="d-flex flex-wrap justify-content-center justify-content-lg-between gap-2">
+                {perso.map((el, index) => <Personnage key={index} nom={el.nom} img={el.img} equipe={el.equipe} />)}
+            </div>
+        </section>
+    );
+};
+
+export default Equipe;
+```
+

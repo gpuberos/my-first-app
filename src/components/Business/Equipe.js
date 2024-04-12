@@ -21,10 +21,12 @@ const Equipe = () => {
     ])
 
     return (
-        <div>
+        <section className="container">
             <h2>Notre équipage :</h2>
-            <Personnage nom= {perso[0].nom} img={perso[0].img} equipe={perso[0].equipe} />
-        </div>
+            <div className="d-flex flex-wrap justify-content-center justify-content-lg-between gap-2">
+                {perso.map((el, index) => <Personnage key={index} nom={el.nom} img={el.img} equipe={el.equipe} />)}
+            </div>
+        </section>
     );
 };
 
