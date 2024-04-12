@@ -4,7 +4,7 @@ import Lifecycle from "./Lifecycle";
 const index = () => {
     return (
         <Wrapper>
-            <Lifecycle />
+            <Lifecycle name={"Doe"} />
         </Wrapper>
     );
 };

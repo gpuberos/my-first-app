@@ -33,12 +33,12 @@ export default App;
 
 Pour ajouter une image :
 ```js
-import bunny from "./assets/images/bunny.webp";
+import logo from "./assets/images/logo.webp";
 
 function App() {
 	return (
 		<div className="App">
-			<img src={bunny}/>
+			<img src={logo}/>
 		</div>
 	);
 }
@@ -48,13 +48,13 @@ export default App;
 
 On import App.css :
 ```js
-import bunny from "./assets/images/bunny.webp";
+import logo from "./assets/images/logo.webp";
 import './App.css';
 
 function App() {
 	return (
 		<div className="App">
-			<img src={bunny} className="App-logo" alt="bunny" width="416" height="480"/>
+			<img src={logo} className="App-logo" alt="logo" width="416" height="480"/>
 		</div>
 	);
 }
@@ -205,7 +205,7 @@ const index = ({children}) => {
 
 export default index;
 ```
-
+src\components\Home\index.js
 ```js
 import Wrapper from "../Wrapper";
 
@@ -955,9 +955,169 @@ class Lifecycle extends Component {
         console.log(`Etape ${this.state.step} : je suis dans le render`);
         return (
             <div>
-                {console.log(`Etape ${this.state.step} : je dans le return`)}
+                {console.log(`Etape ${this.state.step} : je suis dans le return`)}
                 <p>Chargement : {this.state.step}</p>
                 <p>Nom : {this.state.name}</p>
+            </div>
+        )
+    }
+}
+
+export default Lifecycle;
+```
+
+> [!TIP]
+> `rcc` : snippet création react class
+> `cdm` : snippet componentDidMount
+
+src\components\Prestation\Lifecycle.js
+```js
+import { Component } from 'react';
+import ChildComponent from './ChildComponent';
+
+class Lifecycle extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'Soso',
+            step: 1
+        }
+        console.log(`Etape ${this.state.step} : je suis dans le constructeur`);
+    }
+    
+    componentDidMount() {
+        console.log(`Etape ${this.state.step} : je suis dans la phase de montage`)
+    }
+
+    render() {
+        console.log(`Etape ${this.state.step} : je suis dans le render`);
+        return (
+            <div>
+                {console.log(`Etape ${this.state.step} : je suis dans le return`)}
+                <p>Chargement : {this.state.step}</p>
+                <p>Nom : {this.state.name}</p>
+                <ChildComponent/>
+            </div>
+        )
+    }
+}
+
+export default Lifecycle;
+```
+
+Le DidMount parent est fait après le DidMount de l'enfant.
+
+src\components\Prestation\Lifecycle.js
+```js
+import { Component } from 'react';
+import ChildComponent from './ChildComponent';
+
+class Lifecycle extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'Soso',
+            step: 1
+        }
+        console.log(`Etape ${this.state.step} : je suis dans le constructeur (1)`);
+    }
+    
+    componentDidMount() {
+        console.log(`Etape ${this.state.step} : je suis dans la phase de montage (8)`)
+    }
+
+    render() {
+        console.log(`Etape ${this.state.step} : je suis dans le render (2)`);
+        return (
+            <div>
+                {console.log(`Etape ${this.state.step} : je suis dans le return (3)`)}
+                <p>Chargement : {this.state.step}</p>
+                <p>Nom : {this.state.name}</p>
+                <ChildComponent/>
+            </div>
+        )
+    }
+}
+
+export default Lifecycle;
+
+```
+
+src\components\Prestation\ChildComponent.js
+```js
+import { Component } from 'react'
+
+class ChildComponent extends Component {
+    constructor(props) {
+        super(props)
+        console.log(`Etape 1 : je suis dans le constructeur enfant (4)`);
+    }
+    componentDidMount() {
+        console.log(`Etape 1 : je suis dans le didmount enfant (7)`);
+    }
+    render() {
+        console.log(`Etape 1 : je suis dans le render enfant (5)`);
+        return (
+            <div>
+                {console.log(`Etape 1 : je suis dans le return enfant (6)`)}
+                ChildComponent
+            </div>
+
+        )
+    }
+}
+
+export default ChildComponent
+```
+
+#### Updating
+
+`setState()` est défini dans le Mounting (pendant la phase de montage) et jamais au moment du Updating parce que sinon on rentrerait dans une boucle infini.
+
+Quand on met à jour le state il va dans le render puis dans React updates DOM puis finalement il rentre dans componentDidUpdate.
+
+src\components\Prestation\Lifecycle.js
+```js
+import { Component } from 'react';
+import ChildComponent from './ChildComponent';
+
+class Lifecycle extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'Soso',
+            step: 1
+        }
+        console.log(`Etape ${this.state.step} : je suis dans le Constructor (1)`);
+
+    }
+    
+    componentDidMount() {
+        console.log(`Etape ${this.state.step} : je suis dans la phase de DidMount (8)`)
+        this.setState({
+            name: this.props.name,
+            step: this.state.step + 1
+        })
+        console.log(`Etape ${this.state.step} : je suis dans le setState du DidMount`)
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log(`Etape ${this.state.step} : je suis dans le DidUpdate`)
+        console.log(prevState);
+        console.log(this.state);
+    }
+
+    render() {
+        console.log(`Etape ${this.state.step} : je suis dans le Render (2)`);
+        return (
+            <div>
+                {console.log(`Etape ${this.state.step} : je suis dans le return React updates DOM (3)`)}
+                <p>Chargement : {this.state.step}</p>
+                <p>Nom : {this.state.name}</p>
+                {/* <ChildComponent/> */}
             </div>
         )
     }
