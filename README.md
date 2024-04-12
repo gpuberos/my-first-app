@@ -806,9 +806,11 @@ export default Equipe;
 
 ## Lifecycle (Cycle de vie)
 
-![Lifecycle](./docs/images/react-hook-lifecycle.webp)
-
 ### Composant de type class
+
+#### Mounting
+
+![Lifecycle](./docs/images/react-hook-lifecycle.webp)
 
 Un composant de type class la seule méthode obligatoire est la méthode render()
 Dans la méthode render on ne va jamais changer le state
@@ -1073,6 +1075,8 @@ export default ChildComponent
 ```
 
 #### Updating
+
+![Lifecycle](./docs/images/react-hook-lifecycle-step.webp)
 
 `setState()` est défini dans le Mounting (pendant la phase de montage) et jamais au moment du Updating parce que sinon on rentrerait dans une boucle infini.
 
