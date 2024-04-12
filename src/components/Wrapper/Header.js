@@ -1,33 +1,35 @@
 import { Link } from "react-router-dom";
-import '../../assets/styles/header.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faReact } from '@fortawesome/free-brands-svg-icons';
+import lapin from "../../assets/images/bunny.webp";
 
 const Header = () => {
     return (
-        <header>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-                <div className="container-fluid">
-                    <Link className="navbar-brand" to={"/"}><FontAwesomeIcon icon={faReact} /> My First App</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to={"/"}><FontAwesomeIcon icon={faHome} /> Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to={"/contact"}><FontAwesomeIcon icon={faEnvelope} /> Contact</Link>
-                            </li>
-                        </ul>
-                    </div>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+            <div className="container-fluid">
+                <Link className="navbar-brand" to={"/"}>
+                    <img src={lapin} alt="logo lapin" style={{height:"60px"}} />
+                </Link>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link className="nav-link active" aria-current="page" to={"/business"}>Notre Entreprise</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={"/service"}>Nos Prestations</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={"/blog"}>L'Actualité</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={"/contact"}>Nous Contacter</Link>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-        </header>
+            </div>
+        </nav>
     );
-};
+}
 
 export default Header;
-
