@@ -1,4 +1,4 @@
-const Personnage = ({nom, img, equipe}) => {
+const Personnage = ({ nom, img, equipe }) => {
     return (
 
         <div className="card" style={{ width: "18rem"}}>

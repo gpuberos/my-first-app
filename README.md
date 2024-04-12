@@ -563,6 +563,11 @@ export default App;
 
 Ensuite on crée chacun des composants qu'on associe à la route ex: Blog
 
+> [!TIP]
+> Avec Visual Studio Code au lieu de créer un simple répertoire, cliquez sur nouveau fichier depuis l'explorateur de Visual Studio Code et saisissez `Blog/index.js` cela va créer le répertoire (Component) `Blog` et le fichier `index.js`.
+
+Dans le fichier `index.js` saisissez le snippet `rsc` puis valider avec entrée pour crée le code du composant.
+
 src\components\Blog\index.js
 ```js
 import Wrapper from "../Wrapper";
@@ -621,14 +626,45 @@ export default Header;
 
 ### Création d'un composant Equipes
 
-Dans le composant Business, on veut un composant Equipes et qu'on appelle autant de fois qu'il est nécessaire le composant Personnage.
-Le composant Equipes à un State qui prend en paramètre une liste de personnage et avec ça on va mapper pour appeler le composant Personnage autant que nécessaire.
+Dans le composant `Business`, on veut un composant `Equipe` et qu'on appelle autant de fois qu'il est nécessaire le composant `Personnage`.
+Le composant `Equipe` à un `State` qui prend en paramètre une liste de personnages et avec ça on va mapper pour appeler le composant `Personnage` autant de fois que nécessaire.
 
-Le composant Personnage contient
+Le composant Personnage contient :
 - Image
 - Nom : Luffy
 - Equipage : Chapeau de Paille
 
+**Avec `props`**
+
+src\components\Business\Personnage.js
+```js
+const Personnage = (props) => {
+    {/*
+    const nom = props.nom
+    const img = props.img
+    const equipe = props.equipe
+    */}
+
+    {/* En une ligne : */}
+    const {nom, img, equipe} = props
+    
+    return (
+
+        <div className="card" style={{ width: "18rem" }}>
+            <img src={img} className="card-img-top" alt={"Avis de recherche de " + nom} />
+            <div className="card-body">
+                <p className="card-title">Nom : {nom}</p>
+                <p className="card-text">Equipage : {equipe}</p>
+            </div>
+        </div>
+
+    );
+};
+```
+
+**Avec le destructuring :** C'est celle qu'on utilisera car beaucoup plus courte à écrire.
+
+src\components\Business\Personnage.js
 ```js
 const Personnage = ({nom, img, equipe}) => {
     return (
@@ -725,3 +761,4 @@ const Equipe = () => {
 
 export default Equipe;
 ```
+
