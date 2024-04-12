@@ -804,3 +804,164 @@ const Equipe = () => {
 export default Equipe;
 ```
 
+## Lifecycle (Cycle de vie)
+
+![Lifecycle](./docs/images/react-hook-lifecycle.webp)
+
+### Composant de type class
+
+Un composant de type class la seule méthode obligatoire est la méthode render()
+Dans la méthode render on ne va jamais changer le state
+
+La méthode render va exécuter son propre constructeur.
+La méthode render va exécuter son propre rendu.
+
+Le `this` c'est le contexte veut dire qu'on est à l'intérieur de la class.
+
+Etapes :
+1. Mounting
+2. Update
+3. Unmount
+
+src\components\Prestation\Lifecycle.js
+```js
+import { Component } from 'react';
+
+class Lifecycle extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'Soso'
+        }
+    }
+
+    render() {
+        return (
+            <div><MonComponent /></div>
+        )
+    }
+}
+
+export default Lifecycle;
+```
+Source :
+- https://fr.legacy.reactjs.org/docs/react-component.html#render
+
+
+On importe Lifecycle dans l'index
+
+src\components\Prestation\index.js
+```js
+import Wrapper from "../Wrapper";
+import Lifecycle from "./Lifecycle";
+
+const index = () => {
+    return (
+        <Wrapper>
+            <Lifecycle />
+        </Wrapper>
+    );
+};
+
+export default index;
+```
+
+**Etape 1 Mounting :**
+
+src\components\Prestation\Lifecycle.js
+```js
+import { Component } from 'react';
+
+class Lifecycle extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'Soso',
+            step: 1
+        }
+        log
+    }
+
+    render() {
+        return (
+            <div>
+                <p>Chargement : {this.state.step}</p>
+                <p>Nom : {this.state.name}</p>
+            </div>
+        )
+    }
+}
+
+export default Lifecycle;
+
+```
+
+On console log pour savoir ou on se trouve dans notre code (contructeur, render ou return)
+
+```js
+import { Component } from 'react';
+
+class Lifecycle extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'Soso',
+            step: 1
+        }
+        console.log(`Etape ${this.state.step} : je suis dans le constructeur`);
+    }
+    
+    render() {
+        console.log(`Etape ${this.state.step} : je suis dans le render`);
+        return (
+            <div>
+                {console.log(`Etape ${this.state.step} : je dans le return`)}
+                <p>Chargement : {this.state.step}</p>
+                <p>Nom : {this.state.name}</p>
+            </div>
+        )
+    }
+}
+
+export default Lifecycle;
+```
+
+On va vérifier le `componentDidMount`
+Ne s'execute qu'au moment du montage du composant
+
+src\components\Prestation\Lifecycle.js
+```js
+import { Component } from 'react';
+
+class Lifecycle extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: 'Soso',
+            step: 1
+        }
+        console.log(`Etape ${this.state.step} : je suis dans le constructeur`);
+    }
+    
+    componentDidMount() {
+        console.log(`Etape ${this.state.step} : je suis dans la phase de montage`)
+    }
+
+    render() {
+        console.log(`Etape ${this.state.step} : je suis dans le render`);
+        return (
+            <div>
+                {console.log(`Etape ${this.state.step} : je dans le return`)}
+                <p>Chargement : {this.state.step}</p>
+                <p>Nom : {this.state.name}</p>
+            </div>
+        )
+    }
+}
+
+export default Lifecycle;
+```
