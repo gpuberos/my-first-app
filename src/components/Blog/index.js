@@ -1,9 +1,11 @@
 import Wrapper from "../Wrapper";
+import Hoc from "./Hoc";
 
 const index = () => {
+
     return (
         <Wrapper>
-            <h1 className="h3 text-primary">L'Actualité</h1>
+            <Hoc />
         </Wrapper>
     );
 };
