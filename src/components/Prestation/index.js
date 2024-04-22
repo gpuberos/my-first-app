@@ -1,10 +1,11 @@
-import Wrapper from "../Wrapper";
-import Lifecycle from "./Lifecycle";
+import Wrapper from '../Wrapper';
+import FormWithValidation from './FormWithValidation';
+// import LifeCycle from './LifeCycle';
 
 const index = () => {
     return (
         <Wrapper>
-            <Lifecycle name={"Doe"} />
+            <FormWithValidation />
         </Wrapper>
     );
 };
