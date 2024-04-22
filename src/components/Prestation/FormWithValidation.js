@@ -40,45 +40,47 @@ const FormWithValidation = () => {
     }
 
     return (
-        <form className="col-10 mx-auto" onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="firstName" className="form-label">Prénom :</label>
-                <input
-                    type="text"
-                    ref={firstNameRef}
-                    id="firstName"
-                    className={firstName.length < 1 ? "form-control" : isValidFirstName ? "form-control is-valid" : "form-control is-invalid"}
-                    name="firstName"
-                    onChange={e => setFirstName(e.target.value)}
-                />
-            </div>
+        <>
+            <form className="col-10 mx-auto" onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label htmlFor="firstName" className="form-label">Prénom :</label>
+                    <input
+                        type="text"
+                        ref={firstNameRef}
+                        id="firstName"
+                        className={firstName.length < 1 ? "form-control" : isValidFirstName ? "form-control is-valid" : "form-control is-invalid"}
+                        name="firstName"
+                        onChange={e => setFirstName(e.target.value)}
+                    />
+                </div>
 
-            <div className="mb-3">
-                <label htmlFor="lastName">Nom :</label>
-                <input
-                    type="text"
-                    ref={lastNameRef}
-                    id="lastName"
-                    className={lastName.length < 1 ? "form-control" : isValidLastName ? "form-control is-valid" : "form-control is-invalid"}
-                    name="lastName"
-                    onChange={e => setLastName(e.target.value)}
-                />
-            </div>
+                <div className="mb-3">
+                    <label htmlFor="lastName">Nom :</label>
+                    <input
+                        type="text"
+                        ref={lastNameRef}
+                        id="lastName"
+                        className={lastName.length < 1 ? "form-control" : isValidLastName ? "form-control is-valid" : "form-control is-invalid"}
+                        name="lastName"
+                        onChange={e => setLastName(e.target.value)}
+                    />
+                </div>
 
-            <div className="mb-3">
-                <label htmlFor="email">Email :</label>
-                <input
-                    ref={emailRef}
-                    id="email"
-                    className={email.length < 1 ? "form-control" : isValidEmail ? "form-control is-valid" : "form-control is-invalid"}
-                    type="email"
-                    name="email"
-                    onChange={e => setEmail(e.target.value)}
-                />
-            </div>
+                <div className="mb-3">
+                    <label htmlFor="email">Email :</label>
+                    <input
+                        ref={emailRef}
+                        id="email"
+                        className={email.length < 1 ? "form-control" : isValidEmail ? "form-control is-valid" : "form-control is-invalid"}
+                        type="email"
+                        name="email"
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                </div>
 
-            <input type="submit" className='btn btn-primary' value="Envoyer" />
-        </form>
+                <input type="submit" className='btn btn-primary' value="Envoyer" />
+            </form>
+        </>
     );
 };
 
