@@ -1354,3 +1354,45 @@ const FuncLifeCicle = () => {
 
 export default FuncLifeCicle;
 ```
+
+### HOC "Higher-Order Component" ou "Composant d’Ordre Supérieur"
+
+Un HOC est une fonction qui prend un composant en entrée et renvoie un nouveau composant avec des fonctionnalités supplémentaires ou modifiées. Il permet de réutiliser la logique des composants, ce qui est utile lorsque vous avez des comportements similaires à partager entre différents composants. Par exemple, vous pouvez utiliser un HOC pour gérer l’état ou manipuler les props avant qu’elles ne soient passées à votre composant.
+
+Source :
+- https://fr.legacy.reactjs.org/docs/higher-order-components.html
+
+```js
+import { useState } from "react";
+import Mysterio from "./Mysterio";
+import Vision from "./Vision";
+
+const Hoc = () => {
+
+    const [mysterioHits, setMysterioHits] = useState(0)
+    const [visionHits, setVisionHits] = useState(0)
+    // const [hits, setHits] = useState(0)
+
+    const countHits = (params) => {
+        console.log(params);
+        if (params === 'mysterio') {
+            setMysterioHits(mysterioHits + 1)
+        } else if(params === 'vision') {
+            setVisionHits(visionHits + 1)
+        }
+    }
+
+    return (
+        <div className="container text-center">
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-6 my-3 d-flex justify-content-center">
+                    <Mysterio countHits={countHits} mysterioHits={mysterioHits} />
+                    <Vision countHits={countHits} visionHits={visionHits} />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Hoc;
+```
