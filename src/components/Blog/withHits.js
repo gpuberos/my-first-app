@@ -1,9 +1,7 @@
-import { createContext, useState } from "react";
-
-const lifeContext = createContext()
+import { useState } from "react";
 
 const withHits = (PersonageComponent) => {
-
+    
     return (props) => {
         const [hits, setHits] = useState(0);
         const [life, setLife] = useState({ Mysterio: 100, Vision: 100 });
@@ -30,8 +28,6 @@ const withHits = (PersonageComponent) => {
             }
         };
 
-
-
         // const attack = (name) => {
         //     if (!isDead) {
         //         setHits(hits + 1);
@@ -50,12 +46,12 @@ const withHits = (PersonageComponent) => {
         //     }
         // };
 
-        return (<PersonageComponent
+        return <PersonageComponent
             hits={hits}
             life={life}
             attack={attack}
             isDead={isDead}
-            {...props} />);
+            {...props} />;
     };
 };
 
