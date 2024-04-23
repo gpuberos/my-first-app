@@ -1,14 +1,16 @@
 import MysterioPict from "../../assets/images/mysterio.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandFist } from "@fortawesome/free-solid-svg-icons";
+import { faHandFist, faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
 import { faGratipay } from "@fortawesome/free-brands-svg-icons";
 import withHits from './withHits';
 
-const Mysterio = ({ countHits, hits, life, name, reduceLife }) => {
+const Mysterio = ({ countHits, hits, life, name, reduceLife, isDead }) => {
 
     const handleClick = () => {
-        reduceLife()
-        countHits()
+        if (!isDead) {
+            reduceLife()
+            countHits()
+        }
     }
 
     return (
@@ -20,8 +22,8 @@ const Mysterio = ({ countHits, hits, life, name, reduceLife }) => {
                     <span className="badge text-bg-warning">
                         <FontAwesomeIcon icon={faHandFist} /> {hits}
                     </span>
-                    <span className="badge text-bg-success">
-                        <FontAwesomeIcon icon={faGratipay} /> {life}%
+                    <span className={`badge ${isDead ? 'text-bg-danger' : 'text-bg-success'}`}>
+                        <FontAwesomeIcon icon={isDead ? faSkullCrossbones : faGratipay} /> {isDead ? 'Dead' : `${life}%`}
                     </span>
                 </div>
             </div>
