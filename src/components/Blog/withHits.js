@@ -1,33 +1,61 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
+
+const lifeContext = createContext()
 
 const withHits = (PersonageComponent) => {
+
     return (props) => {
         const [hits, setHits] = useState(0);
-        const [life, setLife] = useState(100);
+        const [life, setLife] = useState({ Mysterio: 100, Vision: 100 });
         const [isDead, setIsDead] = useState(false);
 
-        const countHits = () => {
-            setHits(hits + 1);
-        };
-
-        const reduceLife = () => {
-            if (life - 10 <= 0) {
-                setLife(0);
-                setIsDead(true);
-            } else {
-                setLife(life - 10);
+        const attack = (name) => {
+            if (!isDead) {
+                setHits(prevHits => {
+                    const newHits = prevHits + 1;
+                    setLife(prevLife => {
+                        const newLife = { ...prevLife };
+                        if (newLife[name] - 10 <= 0) {
+                            newLife[name] = 0;
+                            setIsDead(true);
+                        } else {
+                            newLife[name] -= 10;
+                        }
+                        console.log(`Hits: ${newHits}`);
+                        console.log(`Life: ${JSON.stringify(newLife)}`);
+                        return newLife;
+                    });
+                    return newHits;
+                });
             }
-            
         };
 
-        // Nous passons la fonction countHits et l'état hits au composant enveloppé
-        return <PersonageComponent
-            countHits={countHits}
+
+
+        // const attack = (name) => {
+        //     if (!isDead) {
+        //         setHits(hits + 1);
+        //         setLife(prevLife => {
+        //             const newLife = { ...prevLife };
+        //             if (newLife[name] - 10 <= 0) {
+        //                 newLife[name] = 0;
+        //                 setIsDead(true);
+        //             } else {
+        //                 newLife[name] -= 10;
+        //             }   
+        //             console.log(`Hits: ${hits + 1}`);
+        //             console.log(`Life: ${JSON.stringify(newLife)}`);
+        //             return newLife;
+        //         });
+        //     }
+        // };
+
+        return (<PersonageComponent
             hits={hits}
             life={life}
-            reduceLife={reduceLife}
+            attack={attack}
             isDead={isDead}
-            {...props} />;
+            {...props} />);
     };
 };
 

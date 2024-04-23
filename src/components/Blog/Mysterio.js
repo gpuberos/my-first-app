@@ -4,12 +4,12 @@ import { faHandFist, faSkullCrossbones } from "@fortawesome/free-solid-svg-icons
 import { faGratipay } from "@fortawesome/free-brands-svg-icons";
 import withHits from './withHits';
 
-const Mysterio = ({ countHits, hits, life, name, reduceLife, isDead }) => {
+const Mysterio = ({ hits, life, name, attack, isDead }) => {
 
     const handleClick = () => {
         if (!isDead) {
-            reduceLife()
-            countHits()
+            attack('Vision')
+            
         }
     }
 
@@ -18,12 +18,12 @@ const Mysterio = ({ countHits, hits, life, name, reduceLife, isDead }) => {
             <div className="text-center">
                 <img src={MysterioPict} alt="Mysterio" style={{ height: "512px" }} />
                 <button onClick={handleClick} className="btn btn-success">{name} Attack</button>
-                <div class="mt-2 d-flex justify-content-around">
+                <div className="mt-2 d-flex justify-content-around">
                     <span className="badge text-bg-warning">
                         <FontAwesomeIcon icon={faHandFist} /> {hits}
                     </span>
                     <span className={`badge ${isDead ? 'text-bg-danger' : 'text-bg-success'}`}>
-                        <FontAwesomeIcon icon={isDead ? faSkullCrossbones : faGratipay} /> {isDead ? 'Dead' : `${life}%`}
+                        <FontAwesomeIcon icon={isDead ? faSkullCrossbones : faGratipay} /> {isDead ? 'Dead' : `${life['Mysterio']}%`}
                     </span>
                 </div>
             </div>
